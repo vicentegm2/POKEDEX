@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap");
 :root {
   --clr-black: #1c1c1c;
   --clr-gray: #ececec;
@@ -92,20 +92,10 @@ main {
 
 .pokemon-todos {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(1, 1fr);
   gap: 1rem;
 }
 
-@media screen and (min-width: 470px) {
-  .pokemon-todos {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media screen and (min-width: 700px) {
-  .pokemon-todos {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
 .pokemon {
   border-radius: 1rem;
   background-color: var(--clr-white);
@@ -178,31 +168,22 @@ main {
   justify-content: center;
 }
 
-.tipo {
+.type, .fairy, .steel, .dragon, .dark, .ghost, .rock, .bug, .psychic, .flying, .ground, .poison, .fighting, .ice, .electric, .grass, .water, .fire, .normal {
   padding: 0.25rem 0.5rem;
   border-radius: 100vmax;
-}
-
-.pokemon-stats {
-  display: flex;
-  gap: 1rem;
-  font-size: 0.85rem;
-}
-
-.stat {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--clr-black);
   background-color: var(--clr-gray);
-  padding: 0.25rem 0.5rem;
-  border-radius: 100vmax;
 }
 
 .normal {
   background-color: var(--type-normal);
-  color: var(--clr-black);
 }
 
 .fire {
   background-color: var(--type-fire);
-  color: var(--clr-black);
+  color: var(--clr-white);
 }
 
 .water {
@@ -212,17 +193,14 @@ main {
 
 .grass {
   background-color: var(--type-grass);
-  color: var(--clr-black);
 }
 
 .electric {
   background-color: var(--type-electric);
-  color: var(--clr-black);
 }
 
 .ice {
   background-color: var(--type-ice);
-  color: var(--clr-black);
 }
 
 .fighting {
@@ -237,27 +215,22 @@ main {
 
 .ground {
   background-color: var(--type-ground);
-  color: var(--clr-black);
 }
 
 .flying {
   background-color: var(--type-flying);
-  color: var(--clr-black);
 }
 
 .psychic {
   background-color: var(--type-psychic);
-  color: var(--clr-black);
 }
 
 .bug {
   background-color: var(--type-bug);
-  color: var(--clr-black);
 }
 
 .rock {
   background-color: var(--type-rock);
-  color: var(--clr-black);
 }
 
 .ghost {
@@ -277,10 +250,45 @@ main {
 
 .steel {
   background-color: var(--type-steel);
-  color: var(--clr-black);
 }
 
 .fairy {
   background-color: var(--type-fairy);
-  color: var(--clr-black);
+}
+
+.pokemon-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+}
+
+.stat, .speed, .special-defense, .special-attack, .defense, .attack, .hp {
+  background-color: var(--clr-gray);
+  padding: 0.25rem 0.5rem;
+  border-radius: 100vmax;
+}
+
+.hp {
+  background-color: var(--type-normal);
+}
+
+.attack {
+  background-color: var(--type-fighting);
+  color: var(--clr-white);
+}
+
+.defense {
+  background-color: var(--type-ground);
+}
+
+.special-attack {
+  background-color: var(--type-electric);
+}
+
+.special-defense {
+  background-color: var(--type-ice);
+}
+
+.speed {
+  background-color: var(--type-flying);
 }/*# sourceMappingURL=style.css.map */

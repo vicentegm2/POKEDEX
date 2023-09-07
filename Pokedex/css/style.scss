@@ -1,12 +1,13 @@
-// Importación de fuentes
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
 
-// Definición de variables de color
+$color-text: var(--clr-black);
+$color-background: var(--clr-gray);
+$pokemon-columns: 1;
+
 :root {
     --clr-black: #1c1c1c;
     --clr-gray: #ececec;
     --clr-white: #f7f7f7;
-
     --type-normal: #A8A878;
     --type-fire: #F08030;
     --type-water: #6890F0;
@@ -27,15 +28,11 @@
     --type-fairy: #F0B6BC;
 }
 
-// Resto de estilos...
-
-
-// Resto de estilos
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: var(--clr-black);
+    color: $color-text;
     font-family: 'Rubik', sans-serif;
 }
 
@@ -51,7 +48,7 @@ button {
 
 body {
     min-height: 100vh;
-    background-color: var(--clr-gray);
+    background-color: $color-background;
 }
 
 header {
@@ -77,6 +74,7 @@ header {
 }
 
 .btn-header {
+    background-color: $color-background;
     padding: .5rem;
     border-radius: 100vmax;
     cursor: pointer;
@@ -86,7 +84,12 @@ header {
     transition: .2s;
 }
 
-.main {
+.btn-header:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 2rem rgba(0, 0, 0, .25);
+}
+
+main {
     padding: 2rem;
     max-width: 1000px;
     margin: 0 auto;
@@ -94,8 +97,16 @@ header {
 
 .pokemon-todos {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(1fr, 1fr));
+    grid-template-columns: repeat($pokemon-columns, 1fr);
     gap: 1rem;
+}
+
+@media screen and (min-width: 470px) {
+    $pokemon-columns: 2;
+}
+
+@media screen and (min-width: 700px) {
+    $pokemon-columns: 3;
 }
 
 .pokemon {
@@ -169,10 +180,112 @@ header {
     justify-content: center;
 }
 
-.tipo {
+.type {
     padding: .25rem .5rem;
     border-radius: 100vmax;
+    font-size: .75rem;
+    font-weight: 500;
+    color: $color-text;
+    background-color: $color-background;
 }
+
+.normal {
+    @extend .type;
+    background-color: var(--type-normal);
+}
+
+.fire {
+    @extend .type;
+    background-color: var(--type-fire);
+    color: var(--clr-white);
+}
+
+.water {
+    @extend .type;
+    background-color: var(--type-water);
+    color: var(--clr-white);
+}
+
+.grass {
+    @extend .type;
+    background-color: var(--type-grass);
+}
+
+.electric {
+    @extend .type;
+    background-color: var(--type-electric);
+}
+
+.ice {
+    @extend .type;
+    background-color: var(--type-ice);
+}
+
+.fighting {
+    @extend .type;
+    background-color: var(--type-fighting);
+    color: var(--clr-white);
+}
+
+.poison {
+    @extend .type;
+    background-color: var(--type-poison);
+    color: var(--clr-white);
+}
+
+.ground {
+    @extend .type;
+    background-color: var(--type-ground);
+}
+
+.flying {
+    @extend .type;
+    background-color: var(--type-flying);
+}
+
+.psychic {
+    @extend .type;
+    background-color: var(--type-psychic);
+}
+
+.bug {
+    @extend .type;
+    background-color: var(--type-bug);
+}
+
+.rock {
+    @extend .type;
+    background-color: var(--type-rock);
+}
+
+.ghost {
+    @extend .type;
+    background-color: var(--type-ghost);
+    color: var(--clr-white);
+}
+
+.dark {
+    @extend .type;
+    background-color: var(--type-dark);
+    color: var(--clr-white);
+}
+
+.dragon {
+    @extend .type;
+    background-color: var(--type-dragon);
+    color: var(--clr-white);
+}
+
+.steel {
+    @extend .type;
+    background-color: var(--type-steel);
+}
+
+.fairy {
+    @extend .type;
+    background-color: var(--type-fairy);
+}
+
 
 .pokemon-stats {
     display: flex;
@@ -186,25 +299,33 @@ header {
     border-radius: 100vmax;
 }
 
-// Estilos de tipos de Pokémon específicos utilizando las funciones
-.normal {
-    @include tipo-styles(var(--type-normal), var(--clr-black));
+.hp {
+    @extend .stat;
+    background-color: var(--type-normal);
 }
 
-.fire {
-    @include tipo-styles(var(--type-fire), var(--clr-black));
+.attack {
+    @extend .stat;
+    background-color: var(--type-fighting);
+    color: var(--clr-white);
 }
 
-.water {
-    @include tipo-styles(var(--type-water), var(--clr-white));
+.defense {
+    @extend .stat;
+    background-color: var(--type-ground);
 }
 
-.grass {
-    @include tipo-styles(var(--type-grass), var(--clr-black));
+.special-attack {
+    @extend .stat;
+    background-color: var(--type-electric);
 }
 
-.electric {
-    @include tipo-styles(var(--type-electric), var(--clr-black));
+.special-defense {
+    @extend .stat;
+    background-color: var(--type-ice);
 }
 
-// ... Repite esto para los demás tipos de Pokémon ...
+.speed {
+    @extend .stat;
+    background-color: var(--type-flying);
+}

@@ -1,86 +1,83 @@
 const listaPokemon = document.querySelector("#listaPokemon");
 const botonesHeader = document.querySelectorAll(".btn-header");
-const pokemonPorPagina = 20;
+const pokemonPorPagina = 10;
 let paginaActual = 1;
-
+const maxPokemon = 151; /* Número de Pokemones -- Máximo 1008 */
 let URL = "https://pokeapi.co/api/v2/pokemon/";
 
-for (let i = 1; i <= 151; i++) {
-    fetch(URL + i)
-        .then((response) => response.json())
-        .then(data => mostrarPokemon(data))
+let pokemonList = [];
+
+function cargarPokemonDesdeAPI() {
+    for (let i = 1; i <= maxPokemon; i++) {
+        fetch(URL + i)
+            .then((response) => response.json())
+            .then(data => {
+                pokemonList.push(data);
+                if (pokemonList.length === maxPokemon) {
+                    ordenarYMostrarPokemon();
+                }
+            });
+    }
 }
 
-function mostrarPokemon(poke) {
+function mostrarPokemonEnPagina(pokemon) {
+    const tipos = pokemon.types.map((type) => `<p class="${type.type.name} tipo">${type.type.name}</p>`).join('');
 
-    const inicio = (paginaActual - 1) * pokemonPorPagina;
-    const fin = paginaActual * pokemonPorPagina;
+    let pokeId = pokemon.id.toString();
+    if (pokeId.length === 1) {
+        pokeId = "00" + pokeId;
+    } else if (pokeId.length === 2) {
+        pokeId = "0" + pokeId;
+    }
 
-    if (poke.id >= inicio + 1 && poke.id <= fin) {
-
-        let tipos = poke.types.map((type) => `<p class="${type.type.name} tipo">${type.type.name}</p>`);
-        tipos = tipos.join('');
-
-        let pokeId = poke.id.toString();
-        if (pokeId.length === 1) {
-            pokeId = "00" + pokeId;
-        } else if (pokeId.length === 2) {
-            pokeId = "0" + pokeId;
-        }
-
-
-        const div = document.createElement("div");
-        div.classList.add("pokemon");
-        div.innerHTML = `
+    const div = document.createElement("div");
+    div.classList.add("pokemon");
+    div.innerHTML = `
         <p class="pokemon-id-back">#${pokeId}</p>
         <div class="pokemon-imagen">
-            <img src="${poke.sprites.other["official-artwork"].front_default}" alt="${poke.name}">
+            <img src="${pokemon.sprites.other["official-artwork"].front_default}" alt="${pokemon.name}">
         </div>
         <div class="pokemon-info">
             <div class="nombre-contenedor">
                 <p class="pokemon-id">#${pokeId}</p>
-                <h2 class="pokemon-nombre">${poke.name}</h2>
+                <h2 class="pokemon-nombre">${pokemon.name}</h2>
             </div>
             <div class="pokemon-tipos">
                 ${tipos}
             </div>
             <div class="pokemon-stats">
-                <p class="stat">${poke.height}m</p>
-                <p class="stat">${poke.weight}kg</p>
+                <p class="stat">${pokemon.height}m</p>
+                <p class="stat">${pokemon.weight}kg</p>
             </div>
         </div>
     `;
-        listaPokemon.append(div);
-    }
+    listaPokemon.append(div);
+}
 
-
-
+function ordenarYMostrarPokemon() {
+    pokemonList.sort((a, b) => a.id - b.id);
+    actualizarPagina();
 }
 
 botonesHeader.forEach(boton => boton.addEventListener("click", (event) => {
     const botonId = event.currentTarget.id;
-
     listaPokemon.innerHTML = "";
 
-    for (let i = 1; i <= 151; i++) {
-        fetch(URL + i)
-            .then((response) => response.json())
-            .then(data => {
-
-                if (botonId === "ver-todos") {
-                    mostrarPokemon(data);
-                } else {
+    if (botonId === "ver-todos") {
+        ordenarYMostrarPokemon();
+    } else {
+        for (let i = 1; i <= maxPokemon; i++) {
+            fetch(URL + i)
+                .then((response) => response.json())
+                .then(data => {
                     const tipos = data.types.map(type => type.type.name);
                     if (tipos.some(tipo => tipo.includes(botonId))) {
-                        mostrarPokemon(data);
+                        mostrarPokemonEnPagina(data);
                     }
-                }
-
-            })
+                })
+        }
     }
 }))
-
-// ...
 
 const prevPageBtn = document.getElementById("prev-page");
 const nextPageBtn = document.getElementById("next-page");
@@ -94,7 +91,7 @@ prevPageBtn.addEventListener("click", () => {
 });
 
 nextPageBtn.addEventListener("click", () => {
-    const totalPages = Math.ceil(151 / pokemonPorPagina);
+    const totalPages = Math.ceil(maxPokemon / pokemonPorPagina);
     if (paginaActual < totalPages) {
         paginaActual++;
         actualizarPagina();
@@ -106,15 +103,13 @@ function actualizarPagina() {
     const inicio = (paginaActual - 1) * pokemonPorPagina;
     const fin = paginaActual * pokemonPorPagina;
 
-    for (let i = inicio + 1; i <= fin; i++) {
-        if (i <= 151) {
-            fetch(URL + i)
-                .then((response) => response.json())
-                .then(data => mostrarPokemon(data))
+    for (let i = inicio; i < fin; i++) {
+        if (i < pokemonList.length) {
+            mostrarPokemonEnPagina(pokemonList[i]);
         }
     }
     pageNum.textContent = `Página ${paginaActual}`;
 }
 
-// Llama a actualizarPagina al inicio para mostrar la primera página
-actualizarPagina();
+// Llama a cargarPokemonDesdeAPI al inicio para obtener los Pokémon desde la API
+cargarPokemonDesdeAPI();
