@@ -41,7 +41,7 @@ function mostrarPokemon(poke) {
                 <p class="stat">${poke.weight}kg</p>
             </div>
         </div>
-    ;
+    `;
     listaPokemon.append(div);
 }
 
