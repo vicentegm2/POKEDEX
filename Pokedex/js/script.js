@@ -2,7 +2,7 @@ const listaPokemon = document.querySelector("#listaPokemon");
 const botonesHeader = document.querySelectorAll(".btn-header");
 const pokemonPorPagina = 10;
 let paginaActual = 1;
-const maxPokemon = 151; /* Número de Pokemones -- Máximo 1008 */
+const maxPokemon = 1; /* Número de Pokemones -- Máximo 1008 */
 let URL = "https://pokeapi.co/api/v2/pokemon/";
 
 let pokemonList = [];
