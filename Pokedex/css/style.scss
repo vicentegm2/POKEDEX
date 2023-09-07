@@ -329,3 +329,34 @@ main {
     @extend .stat;
     background-color: var(--type-flying);
 }
+
+/* Estilos para el elemento de paginación */
+footer {
+    display: flex;
+    justify-content: center;
+    margin: 2rem; /* Mayor separación del contenido principal */
+    #pagination-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        button {
+            background-color: $color-background;
+            padding: 0.5rem 1rem;
+            border: 1px solid $color-text;
+            border-radius: 100vmax;
+            color: $color-text;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            &:hover {
+                background-color: $color-text;
+                color: $color-background;
+            }
+        }
+        #page-num {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: $color-text; /* Colores consistentes con el diseño */
+        }
+    }
+}
+

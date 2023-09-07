@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap");
 :root {
   --clr-black: #1c1c1c;
@@ -291,4 +292,34 @@ main {
 
 .speed {
   background-color: var(--type-flying);
+}
+
+/* Estilos para el elemento de paginación */
+footer {
+  display: flex;
+  justify-content: center;
+  margin: 2rem; /* Mayor separación del contenido principal */
+}
+footer #pagination-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+footer #pagination-container button {
+  background-color: var(--clr-gray);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--clr-black);
+  border-radius: 100vmax;
+  color: var(--clr-black);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+footer #pagination-container button:hover {
+  background-color: var(--clr-black);
+  color: var(--clr-gray);
+}
+footer #pagination-container #page-num {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--clr-black); /* Colores consistentes con el diseño */
 }/*# sourceMappingURL=style.css.map */
