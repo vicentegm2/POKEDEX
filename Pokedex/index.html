@@ -16,6 +16,8 @@
         <nav class="nav">
             <img src="./img/logo.png" alt="Logo Pokédex">
             <ul class="nav-list">
+
+                <!-- Lista de tipos -->
                 <li class="nav-item"><button class="btn btn-header" id="ver-todos">Ver todos</button></li>
                 <li class="nav-item"><button class="btn btn-header normal" id="normal">Normal</button></li>
                 <li class="nav-item"><button class="btn btn-header fire" id="fire">Fire</button></li>
@@ -35,6 +37,12 @@
                 <li class="nav-item"><button class="btn btn-header dragon" id="dragon">Dragon</button></li>
                 <li class="nav-item"><button class="btn btn-header steel" id="steel">Steel</button></li>
                 <li class="nav-item"><button class="btn btn-header fairy" id="fairy">Fairy</button></li>
+
+                <!-- Campo de búsqueda -->
+                <li class="nav-item">
+                    <input type="text" id="buscador" placeholder="Buscar Pokémon...">
+                    <button class="btn btn-header" id="buscar-pokemon">Buscar</button>
+                </li>
             </ul>
         </nav>
     </header>
@@ -55,7 +63,6 @@
             <button id="next-page">Siguiente</button>
         </div>
     </footer>
-
 
     <script src="js/script.js"></script>
 </body>

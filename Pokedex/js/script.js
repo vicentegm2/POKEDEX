@@ -59,6 +59,8 @@ function ordenarYMostrarPokemon() {
     actualizarPagina();
 }
 
+
+
 botonesHeader.forEach(boton => boton.addEventListener("click", (event) => {
     const botonId = event.currentTarget.id;
     listaPokemon.innerHTML = "";
@@ -111,5 +113,34 @@ function actualizarPagina() {
     pageNum.textContent = `Página ${paginaActual}`;
 }
 
+// ...
+
+// Obtén una referencia al elemento de entrada de búsqueda y al botón de búsqueda
+const buscadorInput = document.getElementById("buscador");
+const buscarPokemonBtn = document.getElementById("buscar-pokemon");
+
+// Agrega un event listener al botón de búsqueda
+buscarPokemonBtn.addEventListener("click", () => {
+    const searchTerm = buscadorInput.value.toLowerCase().trim();
+
+    // Filtra los Pokémon en base al término de búsqueda
+    const resultados = pokemonList.filter(pokemon => pokemon.name.includes(searchTerm));
+
+    // Limpia la lista actual de Pokémon en la página
+    listaPokemon.innerHTML = "";
+
+    // Muestra los resultados en la página
+    resultados.forEach(pokemon => {
+        mostrarPokemonEnPagina(pokemon);
+    });
+});
+
+// ...
+
+
+
+
 // Llama a cargarPokemonDesdeAPI al inicio para obtener los Pokémon desde la API
 cargarPokemonDesdeAPI();
+
+
