@@ -2,7 +2,7 @@ const listaPokemon = document.querySelector("#listaPokemon");
 const botonesHeader = document.querySelectorAll(".btn-header");
 const pokemonPorPagina = 10;
 let paginaActual = 1;
-const maxPokemon = 1; /* Número de Pokemones -- Máximo 1008 */
+const maxPokemon = 151; /* Número de Pokemones -- Máximo 1008 */
 let URL = "https://pokeapi.co/api/v2/pokemon/";
 
 let pokemonList = [];
@@ -40,7 +40,8 @@ function mostrarPokemonEnPagina(pokemon) {
         <div class="pokemon-info">
             <div class="nombre-contenedor">
                 <p class="pokemon-id">#${pokeId}</p>
-                <h2 class="pokemon-nombre">${pokemon.name}</h2>
+                <h2 class="pokemon-nombre">
+                <a class="link_Wikedex" target="_blank" href="https://www.wikidex.net/wiki/${pokemon.name}">${pokemon.name}</a></h2>
             </div>
             <div class="pokemon-tipos">
                 ${tipos}
