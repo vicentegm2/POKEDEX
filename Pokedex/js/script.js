@@ -291,7 +291,7 @@ const curiosidades = [
     const curiosidadAleatoria = curiosidades[Math.floor(Math.random() * curiosidades.length)];
 
     // Muestra la curiosidad en un alert
-    alert(curiosidadAleatoria);
+    swal("Curiosidad Pokémon", curiosidadAleatoria);
 }
 
 // Llama a la función para mostrar la curiosidad cada hora (3600000 milisegundos)
