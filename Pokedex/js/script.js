@@ -132,15 +132,37 @@ const buscarPokemonBtn = document.getElementById("buscar-pokemon");
 buscarPokemonBtn.addEventListener("click", () => {
     const searchTerm = buscadorInput.value.toLowerCase().trim();
 
-    // Busca el Pokémon seleccionado en la lista de Pokémon
-    const selectedPokemon = pokemonList.find(pokemon => pokemon.name === searchTerm);
-
-    if (selectedPokemon) {
-        mostrarPokemonEnPagina(selectedPokemon);
+    if (searchTerm === "") {
+        // Muestra un mensaje de error en el div de Pokémon si no se ingresa ningún término de búsqueda
+        mostrarMensajeError('Por favor, ingresa un nombre de Pokémon.');
     } else {
-        console.log("Pokémon no encontrado");
+        // Busca el Pokémon seleccionado en la lista de Pokémon
+        const selectedPokemon = pokemonList.find(pokemon => pokemon.name === searchTerm);
+
+        if (selectedPokemon) {
+            // Muestra el Pokémon si se encuentra
+            mostrarPokemonEnPagina(selectedPokemon);
+        } else {
+            // Muestra un mensaje de error en el div de Pokémon si el Pokémon no se encuentra
+            mostrarMensajeError('Pokémon no encontrado.');
+        }
     }
 });
+
+// Función para mostrar un mensaje de error en el div de Pokémon
+function mostrarMensajeError(mensaje) {
+    listaPokemon.innerHTML = ""; // Limpia la lista de Pokémon actual
+    const mensajeError = document.createElement("p");
+    mensajeError.classList.add("error-message");
+    mensajeError.textContent = mensaje;
+
+    // Elimina mensajes de error anteriores, si los hay
+    const mensajesAnteriores = document.querySelectorAll(".error-message");
+    mensajesAnteriores.forEach(mensaje => mensaje.remove());
+
+    // Agrega el mensaje de error al div de Pokémon
+    listaPokemon.appendChild(mensajeError);
+}
 
 // Llama a cargarPokemonDesdeAPI al inicio para obtener los Pokémon desde la API
 cargarPokemonDesdeAPI();
