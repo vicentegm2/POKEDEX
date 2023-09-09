@@ -15,6 +15,7 @@ function cargarPokemonDesdeAPI() {
                 pokemonList.push(data);
                 if (pokemonList.length === maxPokemon) {
                     ordenarYMostrarPokemon();
+                    llenarOpcionesAutocompletar();
                 }
             });
     }
@@ -59,8 +60,6 @@ function ordenarYMostrarPokemon() {
     pokemonList.sort((a, b) => a.id - b.id);
     actualizarPagina();
 }
-
-
 
 botonesHeader.forEach(boton => boton.addEventListener("click", (event) => {
     const botonId = event.currentTarget.id;
@@ -114,9 +113,18 @@ function actualizarPagina() {
     pageNum.textContent = `Página ${paginaActual}`;
 }
 
-// ...
+// Función para llenar las opciones de autocompletar
+function llenarOpcionesAutocompletar() {
+    const pokemonListDataList = document.getElementById("pokemon-list");
 
-// Obtén una referencia al elemento de entrada de búsqueda y al botón de búsqueda
+    pokemonList.forEach(pokemon => {
+        const option = document.createElement("option");
+        option.value = pokemon.name;
+        pokemonListDataList.appendChild(option);
+    });
+}
+
+// Obtén una referencia al campo de búsqueda y al botón de búsqueda
 const buscadorInput = document.getElementById("buscador");
 const buscarPokemonBtn = document.getElementById("buscar-pokemon");
 
@@ -124,24 +132,15 @@ const buscarPokemonBtn = document.getElementById("buscar-pokemon");
 buscarPokemonBtn.addEventListener("click", () => {
     const searchTerm = buscadorInput.value.toLowerCase().trim();
 
-    // Filtra los Pokémon en base al término de búsqueda
-    const resultados = pokemonList.filter(pokemon => pokemon.name.includes(searchTerm));
+    // Busca el Pokémon seleccionado en la lista de Pokémon
+    const selectedPokemon = pokemonList.find(pokemon => pokemon.name === searchTerm);
 
-    // Limpia la lista actual de Pokémon en la página
-    listaPokemon.innerHTML = "";
-
-    // Muestra los resultados en la página
-    resultados.forEach(pokemon => {
-        mostrarPokemonEnPagina(pokemon);
-    });
+    if (selectedPokemon) {
+        mostrarPokemonEnPagina(selectedPokemon);
+    } else {
+        console.log("Pokémon no encontrado");
+    }
 });
-
-// ...
-
-
-
 
 // Llama a cargarPokemonDesdeAPI al inicio para obtener los Pokémon desde la API
 cargarPokemonDesdeAPI();
-
-

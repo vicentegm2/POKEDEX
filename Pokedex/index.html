@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,14 +8,17 @@
     <link rel="shortcut icon" href="favicon.jpg" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-
     <header>
         <nav class="nav">
             <img src="./img/logo.png" alt="Logo Pokédex">
             <ul class="nav-list">
-
+                <!-- Campo de búsqueda con autocompletar -->
+                <li class="nav-item">
+                    <input type="text" id="buscador" list="pokemon-list" placeholder="Buscar Pokémon...">
+                    <datalist id="pokemon-list"></datalist>
+                    <button class="btn btn-header" id="buscar-pokemon">Buscar</button>
+                </li>
                 <!-- Lista de tipos -->
                 <li class="nav-item"><button class="btn btn-header" id="ver-todos">Ver todos</button></li>
                 <li class="nav-item"><button class="btn btn-header normal" id="normal">Normal</button></li>
@@ -37,34 +39,27 @@
                 <li class="nav-item"><button class="btn btn-header dragon" id="dragon">Dragon</button></li>
                 <li class="nav-item"><button class="btn btn-header steel" id="steel">Steel</button></li>
                 <li class="nav-item"><button class="btn btn-header fairy" id="fairy">Fairy</button></li>
-
-                <!-- Campo de búsqueda -->
-                <li class="nav-item">
-                    <input type="text" id="buscador" placeholder="Buscar Pokémon...">
-                    <button class="btn btn-header" id="buscar-pokemon">Buscar</button>
-                </li>
             </ul>
         </nav>
     </header>
     <main>
         <div id="data-container">
+            <!-- Aquí se mostrarán los resultados de búsqueda y la lista de Pokémon -->
             <div id="todos">
                 <div class="pokemon-todos" id="listaPokemon">
-
+                    <!-- Los Pokémon se cargarán aquí -->
                 </div>
             </div>
         </div>
-
     </main>
     <footer>
         <div id="pagination-container">
+            <!-- Aquí se mostrará la paginación -->
             <button id="prev-page">Anterior</button>
             <span id="page-num">Página 1</span>
             <button id="next-page">Siguiente</button>
         </div>
     </footer>
-
     <script src="js/script.js"></script>
 </body>
-
 </html>
